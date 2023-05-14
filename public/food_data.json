@@ -1,0 +1,138 @@
+[
+    {
+        "country": "england",
+        "food_prompt": "English"
+    },
+    {
+        "country": "united kingdom",
+        "food_prompt": "English"
+      },
+      {
+        "country": "united states",
+        "food_prompt": "American"
+      },
+      {
+        "country": "france",
+        "food_prompt": "French"
+      },
+      {
+        "country": "canada",
+        "food_prompt": "Canadian"
+      },
+      {
+        "country": "jamaica",
+        "food_prompt": "Jamaican"
+      },
+      {
+        "country": "china",
+        "food_prompt": "Chinese"
+      },
+      {
+        "country": "netherlands",
+        "food_prompt": "Dutch"
+      },
+      {
+        "country": "egypt",
+        "food_prompt": "Egyptian"
+      },
+      {
+        "country": "greece",
+        "food_prompt": "Greek"
+      },
+      {
+        "country": "india",
+        "food_prompt": "Indian"
+      },
+      {
+        "country": "ireland",
+        "food_prompt": "Irish"
+      },
+      {
+        "country": "italy",
+        "food_prompt": "Italian"
+      },
+      {
+        "country": "japan",
+        "food_prompt": "Japanese"
+      },
+      {
+        "country": "kenya",
+        "food_prompt": "Kenyan"
+      },
+      {
+        "country": "malaysia",
+        "food_prompt": "Malaysian"
+      },
+      {
+        "country": "mexico",
+        "food_prompt": "Mexican"
+      },
+      {
+        "country": "morocco",
+        "food_prompt": "Moroccan"
+      },
+      {
+        "country": "croatia",
+        "food_prompt": "Croatian"
+      },
+      {
+        "country": "norway",
+        "food_prompt": "Norwegian"
+      },
+      {
+        "country": "portugal",
+        "food_prompt": "Portugese"
+      },
+      {
+        "country": "russia",
+        "food_prompt": "Russian"
+      },
+      {
+        "country": "argentina",
+        "food_prompt": "Argentinian"
+      },
+      {
+        "country": "spain",
+        "food_prompt": "Spanish"
+      },
+      {
+        "country": "slovakia",
+        "food_prompt": "Slovakian"
+      },
+      {
+        "country": "thailand",
+        "food_prompt": "Thai"
+      },
+      {
+        "country": "saudi arabia",
+        "food_prompt": "Saudi Arabian"
+      },
+      {
+        "country": "vietnam",
+        "food_prompt": "Vietnamese"
+      },
+      {
+        "country": "turkey",
+        "food_prompt": "Turkish"
+      },
+      {
+        "country": "jamaica",
+        "food_prompt": "Jamaican"
+      },
+      {
+        "country": "syria",
+        "food_prompt": "Syrian"
+      },
+      {
+        "country": "algeria",
+        "food_prompt": "Algerian"
+      },
+      {
+        "country": "tunisia",
+        "food_prompt": "Tunisian"
+      },
+      {
+        "country": "poland",
+        "food_prompt": "Polish"
+      }
+]

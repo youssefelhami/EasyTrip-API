@@ -7,7 +7,7 @@
 const express = require("express")
 const passport = require('passport');
 const {getAuthKey, logout} = require('../controllers/auth')
-const {apiKeyCheck} = require("../utils/middewares")
+const {apiKeyCheck, validateLogin} = require("../utils/middewares")
 
 
 const router = express.Router();
@@ -17,7 +17,7 @@ router.get("/getkey", getAuthKey);
 
 router.get("/logout", apiKeyCheck, logout)
 
-router.post('/login', apiKeyCheck, passport.authenticate('local'), function(req, res) {
+router.post('/login', apiKeyCheck, validateLogin, passport.authenticate('local'), function(req, res) {
     const { password, ...userWithoutPassword } = req.user.toObject();
     res.status(200).json(userWithoutPassword);
   });

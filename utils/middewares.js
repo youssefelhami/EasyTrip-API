@@ -1,5 +1,7 @@
 const Auth = require("../models/Auth");
 const createError = require("./error");
+const {userSchema} = require('./validator')
+
 
 const apiKeyCheck = async (req, res, next) => {
     const apiKey = req.headers.key;
@@ -20,10 +22,20 @@ const apiKeyCheck = async (req, res, next) => {
 
 const isAuthenticated = (req, res, next) => {
     if (!req.user) {
-      return next(createError(400, 'You are not authorized to access this data'));
+      return next(createError(401, 'You are not authorized to access this data'));
     }
     next();
 }
 
+const validateLogin = (req, res, next) => {
+  username = req.body.username;
+  password = req.body.password;
+  const {error, value} =  userSchema.validate({username, password})
+    if (error){
+        return next(error)
+      }
+  next();
+}
 
-module.exports = {apiKeyCheck, isAuthenticated}
+
+module.exports = {apiKeyCheck, isAuthenticated, validateLogin}

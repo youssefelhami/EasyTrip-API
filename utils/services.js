@@ -80,7 +80,7 @@ const getDayCount = (startDate, endDate) => {
   
     if(first_day>=30) return []
     if(last_day>=30) last_day = 30
-  
+    
     try {
       const response = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/climate?q=${location}&appid=${process.env.WEATHER_API}`);
       const weather_list = response.data.list.map(day => day.temp);

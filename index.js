@@ -59,16 +59,6 @@ app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/trips", tripsRoutes);
 
 
-// app.use((err, req, res, next) => {
-//   if (err) {
-//     if (err.status === 402) {
-//       return res.redirect('http://localhost:3000/');
-//     }
-//     return next(err);
-//   }
-//   next();
-// });
-
 
 app.use((err, req,res,next) => {
     errorStatus = err.status || 500
@@ -82,7 +72,7 @@ app.use((err, req,res,next) => {
 
 
 
-app.listen(process.env.PORT, ()=> {
+app.listen(process.env.PORT || 8080, ()=> {
     connect();
     console.log("Application Started!")
 })

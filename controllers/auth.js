@@ -17,7 +17,7 @@ const getAuthKey = async (req, res, next) => {
     let authData = await Auth.findOne({ client_id, secret });
   
     if (!authData) {
-      return next(createError(400, "Invalid Credentials"));
+      return next(createError(401, "Invalid Credentials"));
     }
   
     let key = authData.key;
@@ -34,21 +34,22 @@ const getAuthKey = async (req, res, next) => {
     res.status(200).json({ key });
   }
 
-const logout = (req, res) => {
+const logout = (req, res, next) => {
     // console.log("Logging Out")
     // console.log(req.user)
-    if (req.user){
+    user = req.user
+    if (user){
         req.logout((err) => {
             if (err) {
                 console.log(err)
                 return res.status(500).send(err.message)
             }
             // console.log("Logged Out Successfully")
-            res.send("Done")
+            res.status(200).json(user);
         })
     }
     else {
-      res.send("Already Logged Out")
+      res.status(200).json({});
     }
 }
 

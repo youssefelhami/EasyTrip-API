@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt')
 
 const getCurrentUser = (req, res) => {
     console.log(`Get User Request: ${JSON.stringify({...req.user})}`)
-    res.send(req.user)
+    if (req.user) res.status(200).json(req.user)
+    else res.status(200).json({})
 }
 
 const addUser = async (req, res, next) => {
@@ -33,7 +34,7 @@ const addUser = async (req, res, next) => {
             res.status(200).json(returnUser);
           }
           else {
-            return next(createError(400, "User Already exists"))
+            return next(createError(409, "User Already exists"))
           }
 
       } catch (err) {

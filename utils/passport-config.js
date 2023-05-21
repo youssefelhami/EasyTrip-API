@@ -9,7 +9,7 @@ passport.use(
       try {
         const user = await User.findOne({ username });
         if (!user) {
-          return done(createError(400, "Wrong password or username!"));
+          return done(createError(401, "Wrong password or username!"));
         }
         const isPasswordCorrect = await bcrypt.compare(
           password,
@@ -17,7 +17,7 @@ passport.use(
         );
   
         if (!isPasswordCorrect) {
-          return done(createError(400, "Wrong password or username!"));
+          return done(createError(401, "Wrong password or username!"));
         }
         return done(null, user);
       } catch (err) {

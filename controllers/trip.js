@@ -17,9 +17,7 @@ const {tripSchema, budgetSchema, countrySchema} = require("../utils/validator");
 
 
 exports.createTrip = async (req, res, next) => {
-  
-  // if(!req.user) return next(createError(400, "you are not authorized to access this data"))
-  
+    
   const {error, value} =  tripSchema.validate(req.body)
   if (error){
     return next(error)
@@ -46,7 +44,6 @@ exports.createTrip = async (req, res, next) => {
 
 exports.updateTrip = async (req, res, next) => {
   
-  // if(!req.user) return next(createError(400, "you are not authorized to access this data"))
   const { id } = req.params;
 
   try {
@@ -86,7 +83,6 @@ exports.updateTrip = async (req, res, next) => {
 };
 
 exports.deleteTrip = async (req, res, next) => {
-  // if(!req.user) return next(createError(400, "you are not authorized to access this data"))
   try {
     const deletedTrip = await Trip.findByIdAndDelete(req.params.id);
     if (!deletedTrip) return next(createError(404, "Trip not found"))
@@ -141,7 +137,6 @@ exports.getTripsByCountry = async (req, res, next) => {
   val_dates = validateDate(startDate, endDate)
   
   if (!val_dates) return next(createError(400, "Invalid Date"))
-  // console.log(weather_list)
   const food_list = await getFood(country)
   const n_trip_days = getDayCount(startDate, endDate);
   try {
@@ -163,6 +158,7 @@ exports.getTripsByCountry = async (req, res, next) => {
 exports.getTripById = async (req, res, next) => {
   try {
     const trip = await Trip.findById(req.params.id);
+    if (!trip) return next(createError(404, "Trip not found"))
     res.status(200).json(trip);
   } catch (err) {
     next(err);

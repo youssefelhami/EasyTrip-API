@@ -68,11 +68,21 @@ const getDayCount = (startDate, endDate) => {
     }
   }
   
-  
+  const options = {
+    timeZone: 'Africa/Cairo',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+  };
+
   const getWeather = async (location, startDate, endDate) => {
     
     const now = new Date();
-    const currentDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toString();
+    const currentDateTime = new Date(now.toLocaleString('en-US', options));
+    const currentDate = new Date(currentDateTime.getFullYear(), currentDateTime.getMonth(), currentDateTime.getDate()).toString();
   
     first_day = getDayCount(currentDate, startDate) -2
     last_day = getDayCount(currentDate, endDate) - 1

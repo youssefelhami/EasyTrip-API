@@ -118,7 +118,7 @@ exports.getTripsByBudget = async (req, res, next) => {
       const exchangeRate =  await getExchangeRate(trip.currency)
       const weather_list = await getWeather(trip.city, startDate, endDate)
       const food_list = await getFood(trip.country)
-      return { ...trip.toObject(), total_price: totalPrice, exchange_rate: exchangeRate, meals: food_list, weather: weather_list};
+      return { ...trip.toObject(), total_price: totalPrice, n_trip_days: n_trip_days, exchange_rate: exchangeRate, meals: food_list, weather: weather_list};
     }));
     res.status(200).json(budgetTripPrices);
   } catch (err) {
@@ -146,7 +146,7 @@ exports.getTripsByCountry = async (req, res, next) => {
       const totalPrice = getTotalPrice(n_trip_days, trip);
       const exchangeRate =  await getExchangeRate(trip.currency)
       const weather_list = await getWeather(trip.city, startDate, endDate)
-      return { ...trip.toObject(), total_price: totalPrice, exchange_rate : exchangeRate, meals:food_list, weather:weather_list };
+      return { ...trip.toObject(), n_trip_days: n_trip_days, total_price: totalPrice, exchange_rate : exchangeRate, meals:food_list, weather:weather_list };
     }));
 
     res.status(200).json(tripPrices);

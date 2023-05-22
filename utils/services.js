@@ -81,11 +81,10 @@ const getDayCount = (startDate, endDate) => {
   const getWeather = async (location, startDate, endDate) => {
     
     const now = new Date();
-    const currentDateTime = new Date(now.toLocaleString('en-US', options));
-    const currentDate = new Date(currentDateTime.getFullYear(), currentDateTime.getMonth(), currentDateTime.getDate()).toString();
+    const currentDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toString();
   
-    first_day = getDayCount(currentDate, startDate) -2
-    last_day = getDayCount(currentDate, endDate) - 1
+    first_day = getDayCount(currentDate, startDate) -1
+    last_day = getDayCount(currentDate, endDate)
   
   
     if(first_day>=30) return []

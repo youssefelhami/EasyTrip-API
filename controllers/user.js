@@ -3,17 +3,17 @@ const createError = require("../utils/error");
 const User = require("../models/User");
 const bcrypt = require('bcrypt')
 
-
-//Get Currently Logged in User
-const getCurrentUser = (req, res) => {
-    if (req.user) res.status(200).json(req.user)
-    else res.status(200).json({})
+const getAllUsers = async (req, res) => {
+  try{
+    const users = await User.find({}).select('-password');
+    res.status(200).json(users);
+  } catch (err) {
+    console.log(err)
+    return next(err)
+  }
 }
 
-// Create New User
 const addUser = async (req, res, next) => {
-
-
   username = req.body.username;
   password = req.body.password;
     const {error, value} =  userSchema.validate({username, password})
@@ -42,4 +42,4 @@ const addUser = async (req, res, next) => {
       }
 }
 
-module.exports = {getCurrentUser, addUser}
+module.exports = {getAllUsers, addUser}

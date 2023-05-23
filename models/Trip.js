@@ -39,4 +39,14 @@ const tripSchema = new mongoose.Schema({
   }
 });
 
+tripSchema.virtual('id').get(function(){
+  return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+tripSchema.set('toJSON', {
+  virtuals: true
+});
+
+
 module.exports = mongoose.model('Trip', tripSchema);

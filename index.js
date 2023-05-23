@@ -28,7 +28,6 @@ mongoose.connection.on("disconnected", () => {
 
 const app = express()
 
-
 //middlewares
 app.use(express.json())
 

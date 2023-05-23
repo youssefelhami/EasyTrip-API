@@ -50,10 +50,11 @@ const logout = (req, res, next) => {
     }
 }
 
+const getCurrentUser = (req, res) => {
+  if (req.user) res.status(200).json(req.user)
+  else res.status(200).json({})
+}
 
 
 
-
-
-
-  module.exports = {getAuthKey, logout}
+  module.exports = {getAuthKey, logout, getCurrentUser}

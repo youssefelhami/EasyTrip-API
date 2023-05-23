@@ -1,6 +1,6 @@
 const express = require("express")
 const passport = require('passport');
-const {getAuthKey, logout} = require('../controllers/auth')
+const {getAuthKey, logout, getCurrentUser} = require('../controllers/auth')
 const {apiKeyCheck, validateLogin} = require("../utils/middewares")
 
 
@@ -12,6 +12,8 @@ router.get("/getkey", getAuthKey);
 
 //User Logout
 router.get("/logout", apiKeyCheck, logout)
+
+router.get("/user", apiKeyCheck, getCurrentUser)
 
 //User Login
 router.post('/login', apiKeyCheck, validateLogin, passport.authenticate('local'), function(req, res) {

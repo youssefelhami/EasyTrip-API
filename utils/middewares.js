@@ -8,13 +8,13 @@ const apiKeyCheck = async (req, res, next) => {
     // console.log(req.headers)
   
     if (!apiKey) {
-      return next(createError(401, "Missing API key"));
+      return next(createError(403, "Invalid or missing API key"));
     }
   
     const apiKeyDoc = await Auth.findOne({ key: apiKey });
   
     if (!apiKeyDoc) {
-      return next(createError(401, "Invalid API key"));
+      return next(createError(403, "Forbidden: Invalid or missing API key"));
     }
   
     next();

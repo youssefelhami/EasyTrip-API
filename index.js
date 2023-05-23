@@ -38,6 +38,9 @@ app.use(
   session({
     secret: "secretcode",
     resave: false,
+    httpOnly: false,
+    secure: false,
+    ephemeral: false,
     saveUninitialized: false,
     cookie: {
       // sameSite: "none",

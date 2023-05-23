@@ -23,7 +23,7 @@ const apiKeyCheck = async (req, res, next) => {
 
 const isAuthenticated = (req, res, next) => {
     if (!req.user) {
-      return next(createError(401, 'You are not authorized to access this data'));
+      return next(createError(401, 'You must be authenticated to access this data'));
     }
     next();
 }

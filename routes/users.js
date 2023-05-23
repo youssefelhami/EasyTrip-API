@@ -8,7 +8,7 @@ const {apiKeyCheck, isAuthenticated} = require("../utils/middewares")
 const router = express.Router();
 
 //Get Logged In User
-router.get("/", apiKeyCheck, getAllUsers)
+router.get("/", apiKeyCheck, isAuthenticated, getAllUsers)
 
 //Create a new User
 router.post("/", apiKeyCheck, isAuthenticated, addUser)

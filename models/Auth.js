@@ -24,4 +24,10 @@ authSchema.set('toJSON', {
   virtuals: true
 });
 
+authSchema.options.toJSON.transform = function(doc, ret) {
+  delete ret._id;
+  delete ret.__v;
+  return ret;
+};
+
 module.exports = mongoose.model('Auth', authSchema);

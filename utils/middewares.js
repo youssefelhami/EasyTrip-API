@@ -1,7 +1,6 @@
 const Auth = require("../models/Auth");
 const createError = require("./error");
 const {userSchema} = require('./validator')
-const createError = require("./error");
 
 
 

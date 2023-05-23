@@ -9,8 +9,7 @@ const tripSchema = Joi.object({
   daily_accommodation: Joi.number().min(0).required().error((errors) => createError(400, 'accommodation is required and needs to be a positive number')),
   daily_food: Joi.number().min(0).required().error((errors) => createError(400, 'food is required and needs to be a positive number')),
   daily_miscellaneous: Joi.number().required().min(0).error((errors) => createError(400, 'miscellaneous is required and needs to be a positive number')),
-  image: Joi.string().min(1).required(),
-  // currency: Joi.string().min(1).required()
+  image: Joi.string().min(1).required()
 })
 
 const budgetSchema = Joi.object({
@@ -30,7 +29,6 @@ const authSchema = Joi.object({
   secret: Joi.string().min(1).required().error((errors) => createError(400, 'Invalid format or missing secret')),
 })
 
-// const emailSchema = Joi.string().email({ tlds: { allow: false } }).regex(/gmail\.com$/).required().error((errors) => createError(400, 'Invalid format: Email is required and must be a gmail address'));
 
 const userSchema = Joi.object({
   username: Joi.string().min(3).required().error((errors) => createError(400, 'Invalid format or missing username')),

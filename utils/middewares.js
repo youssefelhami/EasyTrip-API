@@ -3,10 +3,9 @@ const createError = require("./error");
 const {userSchema} = require('./validator')
 
 
-
+// Checks for the API key in header and makes sure it is valid
 const apiKeyCheck = async (req, res, next) => {
     const apiKey = req.headers.key;
-    // console.log(req.headers)
   
     if (!apiKey) {
       return next(createError(403, "Invalid or missing API key"));
@@ -21,6 +20,7 @@ const apiKeyCheck = async (req, res, next) => {
     next();
   };
 
+// Checks if there is an authenticated user
 const isAuthenticated = (req, res, next) => {
     if (!req.user) {
       return next(createError(401, 'You must be authenticated to access this data'));
@@ -28,6 +28,7 @@ const isAuthenticated = (req, res, next) => {
     next();
 }
 
+// Checks if the Login credentials are valid (username and password exist...)
 const validateLogin = (req, res, next) => {
   username = req.body.username;
   password = req.body.password;

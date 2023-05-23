@@ -3,16 +3,16 @@ const createError = require("../utils/error");
 const User = require("../models/User");
 const bcrypt = require('bcrypt')
 
+
+//Get Currently Logged in User
 const getCurrentUser = (req, res) => {
-    console.log(`Get User Request: ${JSON.stringify({...req.user})}`)
     if (req.user) res.status(200).json(req.user)
     else res.status(200).json({})
 }
 
+// Create New User
 const addUser = async (req, res, next) => {
 
-  // console.log(req.user)  
-  // if(!req.user) return next(createError(400, "you are not authorized to access this data"))
 
   username = req.body.username;
   password = req.body.password;

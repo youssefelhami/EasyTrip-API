@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const createError = require("../utils/error");
 
 
-
+// Configure passport to use a local strategy for authentication (username and password)
 passport.use(
     new LocalStrategy(async (username, password, done) => {
       try {
@@ -28,11 +28,12 @@ passport.use(
     })
   );
 
-
+// Serialize the user object to store in the session
 passport.serializeUser((user, done) => {
     return done(null, user._id);
   });
-  
+
+// Deserialize the user object from the session  
 passport.deserializeUser(async (id, done) => {
 
     try {

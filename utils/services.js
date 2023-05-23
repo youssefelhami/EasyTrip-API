@@ -3,7 +3,7 @@ const currency_data = require('../public/currency_data.json');
 const food_data = require('../public/food_data.json');
 
 
-
+// Get number of days between start date and end date
 const getDayCount = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -11,7 +11,8 @@ const getDayCount = (startDate, endDate) => {
     const n_trip_days = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
     return n_trip_days;
   };
-  
+
+  // Get total price of a trip by multiplying the daily expenses by the number of days, and add in the ticket price
   const getTotalPrice = (n_trip_days, trip) => {
     const { ticket, daily_accommodation, daily_food, daily_miscellaneous } = trip;
   
@@ -25,6 +26,7 @@ const getDayCount = (startDate, endDate) => {
     return totalPrice;
   };
   
+  // Checks if dates are valid (are not in the past, end dat e> start date)
   const validateDate = (startDate, endDate) => {
     const now = new Date();
     const start = new Date(startDate);
@@ -33,12 +35,13 @@ const getDayCount = (startDate, endDate) => {
     return start - currentDate >= 0 && end - start>= 0;
   }
   
+  // Gets the currency code of a country, from a local JSON file mapping the two
   const countryToCurrency = (country) => {
     const currency = currency_data.find((c) => c.country === country.toLowerCase());
     return currency ? currency.currency_code : null;
   };
 
-
+  // Calls third party api to get exchange rate between a currency and EGP
   const getExchangeRate = async (currency) => {
     try {
       const response = await axios.get(`https://api.exchangerate.host/convert?from=${currency}&to=EGP`);
@@ -49,11 +52,13 @@ const getDayCount = (startDate, endDate) => {
     }
   }
   
+  // Makes country name ready for input for the third party API call to get food data
   const getFoodPrompt = (country) => {
     const food_prompt = food_data.find((c) => c.country === country.toLowerCase());
     return food_prompt ? food_prompt.food_prompt : null;
   }
   
+  // Calls 3rd part API to get food data from a country
   const getFood = async (country) => {
     const food_prompt = getFoodPrompt(country)
     if (!food_prompt) return []
@@ -68,16 +73,9 @@ const getDayCount = (startDate, endDate) => {
     }
   }
   
-  const options = {
-    timeZone: 'Africa/Cairo',
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric'
-  };
 
+  // Get weather date from 3rd party api up to 30 days ahead. 
+  //API call gets 30 days from present, function slices the array accordingly to return temperatures
   const getWeather = async (location, startDate, endDate) => {
     
     const now = new Date();
@@ -96,7 +94,6 @@ const getDayCount = (startDate, endDate) => {
       const selected_weather = weather_list.slice(first_day,last_day)
       return selected_weather
     } catch (error) {
-      // console.log(error)
       return []
     }
   }

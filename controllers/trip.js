@@ -15,7 +15,7 @@ const {getWeather,
 const {tripSchema, budgetSchema, countrySchema} = require("../utils/validator");
 
 
-
+// Create Trip and assign it a currency based on the Country
 exports.createTrip = async (req, res, next) => {
     
   const {error, value} =  tripSchema.validate(req.body)
@@ -42,6 +42,7 @@ exports.createTrip = async (req, res, next) => {
 };
 
 
+// Update Trip by ID and reassign currency if change in country
 exports.updateTrip = async (req, res, next) => {
   
   const { id } = req.params;
@@ -82,6 +83,7 @@ exports.updateTrip = async (req, res, next) => {
   }
 };
 
+//Delete Trip by ID
 exports.deleteTrip = async (req, res, next) => {
   try {
     const deletedTrip = await Trip.findByIdAndDelete(req.params.id);
@@ -92,6 +94,8 @@ exports.deleteTrip = async (req, res, next) => {
   }
 };
 
+// Calculates trip prices based on trip duration, selects trips with lower price than budget, 
+//Adds in exchange rate, weather and Food for each trip
 exports.getTripsByBudget = async (req, res, next) => {
   const { startDate, endDate, budget } = req.query;
 
@@ -118,7 +122,7 @@ exports.getTripsByBudget = async (req, res, next) => {
       const exchangeRate =  await getExchangeRate(trip.currency)
       const weather_list = await getWeather(trip.city, startDate, endDate)
       const food_list = await getFood(trip.country)
-      return { ...trip.toObject(), total_price: totalPrice, n_trip_days: n_trip_days, exchange_rate: exchangeRate, meals: food_list, weather: weather_list};
+      return { ...trip.toObject(), n_trip_days: n_trip_days,total_price: totalPrice,  exchange_rate: exchangeRate, meals: food_list, weather: weather_list};
     }));
     res.status(200).json(budgetTripPrices);
   } catch (err) {
@@ -126,6 +130,8 @@ exports.getTripsByBudget = async (req, res, next) => {
   }
 };
 
+//Selects trips in a certain country and Calculates trip prices based on trip duration 
+//Adds in exchange rate, weather and Food for each trip
 exports.getTripsByCountry = async (req, res, next) => {
   const { startDate, endDate, destCountry } = req.query;
   const {error, value} = countrySchema.validate({ startDate, endDate, destCountry })
@@ -155,6 +161,7 @@ exports.getTripsByCountry = async (req, res, next) => {
   }
 };
 
+// Get Trip by ID
 exports.getTripById = async (req, res, next) => {
   try {
     const trip = await Trip.findById(req.params.id);
@@ -165,6 +172,7 @@ exports.getTripById = async (req, res, next) => {
   }
 };
 
+// Get a list of all trips
 exports.getAllTrips = async (req, res, next) => {
   try {
     console.log(req.user)

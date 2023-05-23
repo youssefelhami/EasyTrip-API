@@ -3,10 +3,8 @@ const {authSchema} = require('../utils/validator')
 const crypto = require('crypto');
 const createError = require("../utils/error");
 
-
+// Get OAuth API key from Cliend ID and Secret
 const getAuthKey = async (req, res, next) => {
-    // console.log(req.headers)
-    // const { client_id, secret } = req.body;
     client_id = req.headers.client_id
     secret = req.headers.secret
     const { error, value } = authSchema.validate({ client_id, secret });
@@ -34,9 +32,9 @@ const getAuthKey = async (req, res, next) => {
     res.status(200).json({ key });
   }
 
+// User Logout
 const logout = (req, res, next) => {
-    // console.log("Logging Out")
-    // console.log(req.user)
+
     user = req.user
     if (user){
         req.logout((err) => {
@@ -44,7 +42,6 @@ const logout = (req, res, next) => {
                 console.log(err)
                 return res.status(500).send(err.message)
             }
-            // console.log("Logged Out Successfully")
             res.status(200).json(user);
         })
     }
@@ -53,22 +50,7 @@ const logout = (req, res, next) => {
     }
 }
 
-// const apiKeyCheck = async (req, res, next) => {
-//   const apiKey = req.headers.key;
-//   // console.log(req.headers)
 
-//   if (!apiKey) {
-//     return next(createError(401, "Missing API key"));
-//   }
-
-//   const apiKeyDoc = await Auth.findOne({ key: apiKey });
-
-//   if (!apiKeyDoc) {
-//     return next(createError(401, "Invalid API key"));
-//   }
-
-//   next();
-// };
 
 
 

@@ -175,8 +175,10 @@ exports.getTripById = async (req, res, next) => {
 // Get a list of all trips
 exports.getAllTrips = async (req, res, next) => {
   try {
-    console.log(req.user)
     const trips = await Trip.find();
+    res.set('Content-Range', `country 0-${trips.length}/${trips.length}`);
+    res.set('X-Total-Count', trips.length)
+    res.set('Access-Control-Expose-Headers', 'Content-Range, X-Total-Count')    
     res.status(200).json(trips);
   } catch (err) {
     next(err);

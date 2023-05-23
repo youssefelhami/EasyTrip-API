@@ -30,7 +30,6 @@ const addUser = async (req, res, next) => {
             await newUser.save();
             returnUser = newUser.toObject()
             delete returnUser.password
-            console.log(returnUser)
             res.status(200).json(returnUser);
           }
           else {

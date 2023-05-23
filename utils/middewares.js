@@ -1,6 +1,8 @@
 const Auth = require("../models/Auth");
 const createError = require("./error");
 const {userSchema} = require('./validator')
+const createError = require("./error");
+
 
 
 const apiKeyCheck = async (req, res, next) => {
@@ -14,7 +16,7 @@ const apiKeyCheck = async (req, res, next) => {
     const apiKeyDoc = await Auth.findOne({ key: apiKey });
   
     if (!apiKeyDoc) {
-      return next(createError(403, "Forbidden: Invalid or missing API key"));
+      return next(createError(403, "Invalid or missing API key"));
     }
   
     next();

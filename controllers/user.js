@@ -6,6 +6,9 @@ const bcrypt = require('bcrypt')
 const getAllUsers = async (req, res) => {
   try{
     const users = await User.find({}).select('-password');
+    res.set('Content-Range', `country 0-${users.length}/${users.length}`);
+    res.set('X-Total-Count', users.length)
+    res.set('Access-Control-Expose-Headers', 'Content-Range, X-Total-Count')    
     res.status(200).json(users);
   } catch (err) {
     console.log(err)

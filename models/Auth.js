@@ -15,4 +15,13 @@ const authSchema = new mongoose.Schema({
   }
 });
 
+authSchema.virtual('id').get(function(){
+  return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+authSchema.set('toJSON', {
+  virtuals: true
+});
+
 module.exports = mongoose.model('Auth', authSchema);

@@ -48,5 +48,11 @@ tripSchema.set('toJSON', {
   virtuals: true
 });
 
+tripSchema.options.toJSON.transform = function(doc, ret) {
+  delete ret._id;
+  delete ret.__v;
+  return ret;
+};
+
 
 module.exports = mongoose.model('Trip', tripSchema);
